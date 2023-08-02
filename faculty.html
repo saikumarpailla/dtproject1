@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Faculty Salary Predictor</title>
+  <style>
+    /* CSS styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      color: #555;
+    }
+
+    select,
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      background-color: #fff;
+      color: #333;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      padding: 12px 30px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 30px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-size: 14px;
+      }
+
+      select,
+      input[type="number"] {
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Faculty Salary Predictor</h1>
+  <form id="salaryForm">
+    <div class="form-group">
+      <label for="qualification">Education Qualification:</label>
+      <select id="qualification" name="qualification">
+        <option value="phd">Ph.D.</option>
+        <option value="masters">Master's</option>
+        <option value="bachelors">Bachelor's</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="experience">Experience (in years):</label>
+      <input type="number" id="experience" name="experience" min="0" step="1" placeholder="Enter years of experience">
+    </div>
+
+    <div class="form-group">
+      <label for="institution">Institution Type:</label>
+      <select id="institution" name="institution">
+        <option value="university">University</option>
+        <option value="autonomous">Autonomous</option>
+        <option value="regular">Regular</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="position">Position:</label>
+      <select id="position" name="position">
+        <option value="professor">Professor</option>
+        <option value="associate">Associate Professor</option>
+        <option value="assistant">Assistant Professor</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Geographic Location:</label>
+      <select id="location" name="location">
+        <option value="urban">Urban</option>
+        <option value="rural">Rural</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="publications">Number of Publications:</label>
+      <input type="number" id="publications" name="publications" min="0" step="1" placeholder="Enter the number of publications">
+    </div>
+
+    <div class="form-group">
+      <label for="field">Field of Expertise:</label>
+      <select id="field" name="field">
+        <option value="aiml">AI/ML</option>
+        <option value="ds">Data Science</option>
+        <option value="iot">IoT</option>
+        <option value="cs">Computer Science</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Predict Salary">
+    </div>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    // JavaScript code
+    document.getElementById('salaryForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      calculateSalary();
+    });
+
+    document.getElementById('field').addEventListener('change', function(event) {
+      calculateSalary();
+    });
+
+    function calculateSalary() {
+      // Retrieve form values
+      var qualification = document.getElementById('qualification').value;
+      var experience = parseInt(document.getElementById('experience').value);
+      var institution = document.getElementById('institution').value;
+      var position = document.getElementById('position').value;
+      var location = document.getElementById('location').value;
+      var publications = parseInt(document.getElementById('publications').value);
+      var field = document.getElementById('field').value;
+
+      // Constants for salary calculation (arbitrary values)
+      var baseSalary = 5000;
+      var qualificationFactors = { 'phd': 50000, 'masters': 40000, 'bachelors': 20000};
+      var institutionFactors = { 'university':10000 , 'autonomous': 8000, 'regular': 5000 };
+      var positionFactors = { 'professor':10000 , 'associate':5000 , 'assistant': 2500 };
+      var locationFactors = { 'urban': 1000, 'rural': 500 };
+       if(publications <4&&publications >0)
+        baseSalary+=3000;
+      else
+         baseSalary+=5000;
+
+      // Perform salary prediction based on the given factors
+      var qualificationFactor = qualificationFactors[qualification];
+      var institutionFactor = institutionFactors[institution];
+      var positionFactor = positionFactors[position];
+      var locationFactor = locationFactors[location];
+      if(experience<5&&experience>0)
+        baseSalary+=5000;
+      else if(experience<10&&experience>5)
+         baseSalary+=10000;
+      else
+         baseSalary+=15000;
+        
+
+      var predictedSalary = baseSalary + qualificationFactor + institutionFactor + positionFactor + locationFactor;
+     // predictedSalary += publications * publicationFactor;
+
+      // Calculate additional salary based on field of expertise
+      var fieldOptions = {
+        'aiml': 100,
+        'ds': 100,
+        'iot': 100,
+        'cs': 100,
+      };
+
+      var fieldFactor = fieldOptions[field] || 0;
+      predictedSalary += fieldFactor;
+
+      // Display the predicted salary with the rupee symbol
+      var resultDiv = document.getElementById('result');
+      resultDiv.textContent = 'Predicted Salary: ₹' + predictedSalary.toLocaleString('en-IN');
+    }
+  </script>
+
+  
+
+</body>
+</html>

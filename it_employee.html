@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Salary Prediction</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>IT Employee Remuneration System</h1>
+      <form onsubmit="event.preventDefault();">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="cgpa">CGPA:</label>
+        <input type="number" id="cgpa" name="cgpa" step="0.01" required>
+
+        <label for="experience">Experience (in years):</label>
+        <input type="number" id="experience" name="experience" required>
+
+        <label for="qualification">Qualification:</label>
+        <select id="qualification" name="qualification" required>
+          <option value="">Select Qualification</option>
+          <option value="Bachelors">Bachelors</option>
+          <option value="Masters">Masters</option>
+          <option value="PhD">PhD</option>
+        </select>
+
+        <label for="leetcode">Coding Platforms Rank:</label>
+        <input type="number" id="leetcode" name="leetcode" required>
+
+        <label for="interests">Area of Interest</label>
+        <select id="interests" name="interests" required>
+          <option value="" disabled selected>Select your area of interest</option>
+          <option value="iot">IoT</option>
+          <option value="AI">AI</option>
+          <option value="cloud computing">Cloud Computing</option>
+          <option value="deep learning">Deep Learning</option>
+          <option value="data mining">Data Mining</option>
+        </select>
+
+        <label for="jobrole">Job Role:</label>
+        <select id="jobrole" name="jobrole" required>
+          <option value="" disabled selected>Select your Job Role</option>
+          <option value="tester">Tester</option>
+          <option value="softwaredev">Software Developer</option>
+          <option value="frontend">Frontend Developer</option>
+          <option value="backend">Backend Developer</option>
+          <option value="dataanalyst">Data Analyst</option>
+          <option value="database">Database Administrator</option>
+        </select>
+
+        <label for="skill">Skill Level:</label>
+        <select id="skill" name="skill" required>
+          <option value="" disabled selected>Select your Skill Level</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <label for="location">Geographic Location:</label>
+        <select id="location" name="location" required>
+          <option value="" disabled selected>Select your location</option>
+          <option value="hyderabad">Hyderabad</option>
+          <option value="delhi">Delhi</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="chennai">Chennai</option>
+          <option value="pune">Pune</option>
+        </select>
+
+        <label for="companySize">Company Size:</label>
+        <select id="companySize" name="companySize" required>
+          <option value="" disabled selected>Select company size</option>
+          <option value="Small (1-50 employees)">Small (1-50 employees)</option>
+          <option value="Medium (51-500 employees)">Medium (51-500 employees)</option>
+          <option value="Large (500+ employees)">Large (500+ employees)</option>
+        </select>
+
+        <label for="certificates">Number of Certificates:</label>
+        <input type="number" id="certificates" name="certificates" required>
+
+        <input type="submit" value="Submit" onclick="predictSalary(event)">
+      </form>
+
+      <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
